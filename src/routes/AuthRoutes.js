@@ -3,8 +3,12 @@ import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import User from "../models/UserModal.js";
 import Token from "../models/TokenModal.js";
+import verifyToken from "../middleware/verifyToken.js";
 
 const router = express.Router();
+
+// ✅ Verify token and return user info
+router.get("/verify-token", verifyToken);
 
 router.post("/login", async (req, res) => {
   try {
