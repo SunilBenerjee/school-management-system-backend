@@ -1,6 +1,8 @@
 import express from "express";
-import AuthRoutes from "./routes/AuthRoutes.js";
-import UserRoutes from "./routes/UserRoutes.js";
+import AuthRoute from "./routes/authRoute.js";
+import SuperadminRoute from "./routes/superadminRoute.js";
+import verifyToken from "./middleware/verifyToken.js";
+import generalRoute from "./routes/generalRoute.js";
 
 const app = express();
 
@@ -8,11 +10,13 @@ const app = express();
 app.use(express.json());
 
 // Routes
-app.use("/auth", AuthRoutes);
-app.use("/admin", UserRoutes);
+app.use("/general", generalRoute);
+
+app.use("/auth", AuthRoute);
+
+app.use("/superadmin", verifyToken, SuperadminRoute);
 
 app.get("/", (req, res) => res.send("OKAY ✅ Server is running!"));
-app.get("/testing", (req, res) => res.send("OKAY ✅ Testing route is working!"));
 
 // Export the app
 export default app;

@@ -11,18 +11,11 @@ const tokenSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    expires_at: {
-      type: Date,
-      required: true,
-      default: () => new Date(Date.now() + 24 * 60 * 60 * 1000),
-    },
   },
   {
     timestamps: true,
   }
 );
-
-tokenSchema.index({ expires_at: 1 }, { expireAfterSeconds: 0 });
 
 const Token = mongoose.models.Token || mongoose.model("Token", tokenSchema);
 export default Token;
