@@ -16,7 +16,7 @@ const userSchema = new mongoose.Schema(
     profile_image: { type: String, default: null },
     last_login: { type: Date, default: null },
     status: { type: String, required: true, enum: ["ACTIVE", "INACTIVE"] },
-    unique_id: { type: String, required: true, unique: true },
+    deletedAt: { type: Date, default: null },
   },
   {
     timestamps: true,
@@ -29,6 +29,12 @@ userSchema.pre("save", async function (next) {
   this.password = await bcrypt.hash(this.password, salt);
   next();
 });
+
+userSchema.pre(/^find/, function (next) {
+  this.where({ deletedAt: null });
+  next();
+});
+
 
 const User = mongoose.models.User || mongoose.model("User", userSchema);
 

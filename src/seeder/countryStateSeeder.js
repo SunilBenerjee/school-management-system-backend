@@ -1,6 +1,6 @@
 import axios from "axios";
-import Country from "../models/Country.js";
-import State from "../models/State.js";
+import Country from "../model/countryModel.js";
+import State from "../model/stateModel.js";
 
 const seedCountriesAndStates = async () => {
   try {

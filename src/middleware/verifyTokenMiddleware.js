@@ -1,5 +1,5 @@
-import Token from "../models/Token.js";
-import User from "../models/User.js";
+import Token from "../model/tokenModel.js";
+import User from "../model/userModel.js";
 
 const verifyToken = async (req, res, next) => {
   try {

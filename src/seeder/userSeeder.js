@@ -1,5 +1,4 @@
-import User from "../models/User.js";
-import { v4 as uuid } from "uuid";
+import User from "../model/userModel.js";
 
 const seedUser = async () => {
   try {
@@ -14,7 +13,7 @@ const seedUser = async () => {
       profile_image: "",
       last_login: "",
       status: "ACTIVE",
-      unique_id: uuid(),
+      deletedAt: ""
     });
     await user.save();
   } catch (error) {
